@@ -17,45 +17,54 @@ import { FooterComponent } from './components/footer.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [
-    CommonModule,
-    HeroComponent,
-    FeaturesComponent,
-    AdvantagesComponent,
-    BillingFocusComponent,
-    UseCasesComponent,
-    TestimonialsComponent,
-    PricingComponent,
-    FaqComponent,
-    FinalCtaComponent,
-    FooterComponent
-  ],
+  imports: [CommonModule, HeroComponent, FeaturesComponent, AdvantagesComponent, BillingFocusComponent, UseCasesComponent, TestimonialsComponent, PricingComponent, FaqComponent, FinalCtaComponent, FooterComponent],
   template: `
     <div class="min-h-screen">
-      <!-- Navigation fixe (optionnel) -->
       <nav class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-gray-200 z-50">
         <div class="container-max p-3">
           <div class="flex items-center justify-between py-4">
+            <!-- Logo -->
             <div class="flex items-center space-x-2">
               <div class="w-8 h-8 bg-primary-950 rounded-lg flex items-center justify-center">
                 <span class="text-white font-bold text-sm">NS</span>
               </div>
               <span class="text-xl font-bold text-primary-950">Noyostore</span>
             </div>
+
+            <!-- Menu desktop -->
             <div class="hidden md:flex items-center space-x-8 text-sm">
               <a href="#fonctionnalites" class="text-gray-600 hover:text-primary-950 transition-colors">Fonctionnalités</a>
               <a href="#tarifs" class="text-gray-600 hover:text-primary-950 transition-colors">Tarifs</a>
               <a href="#faq" class="text-gray-600 hover:text-primary-950 transition-colors">FAQ</a>
-              <button class="btn-primary text-sm py-2 px-4">
-                Commencer
-              </button>
+              <button class="btn-primary text-sm py-2 px-4">Commencer</button>
             </div>
+
+            <!-- Menu mobile hamburger -->
+            <button class="md:hidden text-primary-950" (click)="menuOpen = !menuOpen">
+              <svg *ngIf="!menuOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+              <svg *ngIf="menuOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Menu mobile -->
+          <div *ngIf="menuOpen" class="md:hidden mt-4 space-y-4 text-sm">
+            <a href="#fonctionnalites" class="block text-gray-600 hover:text-primary-950">Fonctionnalités</a>
+            <a href="#tarifs" class="block text-gray-600 hover:text-primary-950">Tarifs</a>
+            <a href="#faq" class="block text-gray-600 hover:text-primary-950">FAQ</a>
+            <button class="btn-primary text-sm w-full py-2">Commencer</button>
           </div>
         </div>
       </nav>
 
-      <!-- Contenu principal avec marge pour la nav fixe -->
-      <main class="pt-20">
+      <main class="pt-24">
         <app-hero />
         <app-features />
         <app-advantages />
@@ -71,6 +80,9 @@ import { FooterComponent } from './components/footer.component';
     </div>
   `
 })
-export class App {}
+export class App {
+  menuOpen = false;
+}
+
 
 bootstrapApplication(App);
